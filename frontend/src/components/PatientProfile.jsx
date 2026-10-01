@@ -211,7 +211,7 @@ function PatientProfile({
 
     try {
       const response = await fetch(
-        `${API_BASE_URL}/${patient.patient_id}`,
+        `${API_BASE_URL}/patients/${patient.patient_id}`,
         {
           method: "PUT",
           headers: {
