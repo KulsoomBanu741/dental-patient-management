@@ -1,3 +1,4 @@
+import API_BASE_URL from "./api";
 import PatientCard from "./components/PatientCard";
 import AddPatient from "./components/AddPatient";
 import PatientProfile from "./components/PatientProfile";
@@ -15,7 +16,7 @@ function App() {
   );
 
   const fetchPatients = () => {
-    fetch("http://127.0.0.1:8000/patients/")
+    fetch(`${API_BASE_URL}/patients/`)
       .then((response) => response.json())
       .then((data) => {
         setPatients(data.patients);

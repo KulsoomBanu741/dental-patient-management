@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../App.css";
+import API_BASE_URL from "../api";
 
 function validateDateOfBirth(value) {
   const match = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(value);
@@ -95,7 +96,7 @@ function AddPatient({ onBack, onPatientCreated }) {
     }
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/patients/", {
+      const response = await fetch("${API_BASE_URL}/patients/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CaseSheetView from "./CaseSheetView";
 import "./CaseSheet.css";
-
+import API_BASE_URL from "../api";
 function calculateAge(dateString) {
   const birthDate = new Date(dateString);
   const today = new Date();
@@ -50,7 +50,7 @@ function CaseSheet({ patient, onBack }) {
     const fetchCaseSheet = async () => {
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/patients/${patient.patient_id}/case-sheet`
+          `${API_BASE_URL}/patients/${patient.patient_id}/case-sheet`
         );
 
         if (response.status === 404) {
@@ -144,7 +144,7 @@ function CaseSheet({ patient, onBack }) {
       if (isEditing) {
         // Update an existing case sheet
         response = await fetch(
-          `http://127.0.0.1:8000/patients/${patient.patient_id}/case-sheet`,
+          `${API_BASE_URL}/patients/${patient.patient_id}/case-sheet`,
           {
             method: "PUT",
             headers: {
@@ -156,7 +156,7 @@ function CaseSheet({ patient, onBack }) {
       } else {
         // Create a new case sheet
         response = await fetch(
-          `http://127.0.0.1:8000/patients/${patient.patient_id}/case-sheet`,
+          `${API_BASE_URL}/patients/${patient.patient_id}/case-sheet`,
           {
             method: "POST",
             headers: {
@@ -194,7 +194,7 @@ function CaseSheet({ patient, onBack }) {
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/patients/${patient.patient_id}/summary`,
+        `${API_BASE_URL}/patients/${patient.patient_id}/summary`,
         {
           method: "POST",
         }

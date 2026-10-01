@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CaseSheet from "./CaseSheet";
 import "./PatientProfile.css";
-
+import API_BASE_URL from "../api";
 function formatDate(dateString) {
   const [year, month, day] = dateString.split("-");
   return `${day}/${month}/${year}`;
@@ -99,7 +99,7 @@ function PatientProfile({
     const fetchCaseSheet = async () => {
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/patients/${patient.patient_id}/case-sheet`
+          `${API_BASE_URL}/${patient.patient_id}/case-sheet`
         );
 
         if (response.status === 404) {
@@ -128,7 +128,7 @@ function PatientProfile({
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/patients/${patient.patient_id}/summary`,
+        `${API_BASE_URL}/${patient.patient_id}/summary`,
         {
           method: "POST",
         }
@@ -211,7 +211,7 @@ function PatientProfile({
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/patients/${patient.patient_id}`,
+        `${API_BASE_URL}/${patient.patient_id}`,
         {
           method: "PUT",
           headers: {
