@@ -122,37 +122,47 @@ function PatientProfile({
     fetchCaseSheet();
   }, [patient.patient_id]);
 
-  const handleGenerateSummary = async () => {
-    setIsGeneratingSummary(true);
-    setSummaryError("");
+const handleGenerateSummary = async () => {
+  setIsGeneratingSummary(true);
+  setSummaryError("");
 
-    try {
-      const response = await fetch(
-        `${API_BASE_URL}/patients/${patient.patient_id}/summary`,
-        {
-          method: "POST",
-        }
-      );
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/patients/${patient.patient_id}/summary`,
+      {
+        method: "POST",
+      }
+    );
 
-      const data = await response.json();
+    const data = await response.json();
 
-      if (!response.ok) {
-        throw new Error(
-          data.detail || "Failed to generate AI summary"
+    if (!response.ok) {
+      if (
+        response.status === 404 &&
+        data.detail === "Case sheet not found"
+      ) {
+        setSummaryError(
+          "Please complete and save the patient's Case Sheet before generating an AI summary."
         );
+        return;
       }
 
-      setAiSummary(data.summary);
-    } catch (error) {
-      console.error("AI summary error:", error);
-
-      setSummaryError(
-        "Unable to generate the AI summary. Please check your connection and try again."
+      throw new Error(
+        data.detail || "Failed to generate AI summary"
       );
-    } finally {
-      setIsGeneratingSummary(false);
     }
-  };
+
+    setAiSummary(data.summary);
+  } catch (error) {
+    console.error("AI summary error:", error);
+
+    setSummaryError(
+      "Unable to generate the AI summary. Please check your connection and try again."
+    );
+  } finally {
+    setIsGeneratingSummary(false);
+  }
+};
 
   const [editForm, setEditForm] = useState({
   name: patient.name,
