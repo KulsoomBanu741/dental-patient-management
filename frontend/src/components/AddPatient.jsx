@@ -96,7 +96,7 @@ function AddPatient({ onBack, onPatientCreated }) {
     }
 
     try {
-      const response = await fetch("${API_BASE_URL}/patients/", {
+      const response = await fetch(`${API_BASE_URL}/patients/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
