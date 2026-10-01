@@ -99,7 +99,7 @@ function PatientProfile({
     const fetchCaseSheet = async () => {
       try {
         const response = await fetch(
-          `${API_BASE_URL}/${patient.patient_id}/case-sheet`
+          `${API_BASE_URL}/patients/${patient.patient_id}/case-sheet`
         );
 
         if (response.status === 404) {
