@@ -155,12 +155,14 @@ function PatientProfile({
   };
 
   const [editForm, setEditForm] = useState({
-    name: patient.name,
-    date_of_birth: patient.date_of_birth,
-    gender: patient.gender,
-    phone: patient.phone,
-    address: patient.address,
-  });
+  name: patient.name,
+  date_of_birth: patient.date_of_birth
+    ? patient.date_of_birth.split("-").reverse().join("/")
+    : "",
+  gender: patient.gender,
+  phone: patient.phone,
+  address: patient.address,
+});
 
   const validateEditForm = () => {
     const newErrors = {};
@@ -353,14 +355,7 @@ setSaveMessage("Changes saved successfully");
                 <input
                   type="text"
                   placeholder="DD/MM/YYYY"
-                  value={
-                    editForm.date_of_birth
-                      ? editForm.date_of_birth
-                          .split("-")
-                          .reverse()
-                          .join("/")
-                      : ""
-                  }
+                  value={editForm.date_of_birth}
                   onChange={(event) =>
                     setEditForm({
                       ...editForm,
