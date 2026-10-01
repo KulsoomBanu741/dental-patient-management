@@ -17,7 +17,7 @@ class CaseSheetCreate(BaseModel):
     duration: str = Field(min_length=1)
     tooth_area: str = Field(min_length=1)
     clinical_findings: str = Field(min_length=3)
-    tenderness: str = Field(min_length=3)
+    tenderness: str = Field(min_length=2)
     sensitivity: str = Field(min_length=3)
     additional_findings: str = ""
     diagnosis: str = Field(min_length=3)
