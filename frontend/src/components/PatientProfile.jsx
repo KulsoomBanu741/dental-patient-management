@@ -128,7 +128,7 @@ function PatientProfile({
 
     try {
       const response = await fetch(
-        `${API_BASE_URL}/${patient.patient_id}/summary`,
+        `${API_BASE_URL}/patients/${patient.patient_id}/summary`,
         {
           method: "POST",
         }
